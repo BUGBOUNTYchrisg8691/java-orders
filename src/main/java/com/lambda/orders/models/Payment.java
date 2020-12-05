@@ -1,9 +1,8 @@
 package com.lambda.orders.models;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * The type Payment.
@@ -16,6 +15,9 @@ public class Payment
 	
 	@Column(nullable = false)
 	private String type;
+	
+	@ManyToMany(mappedBy = "payments")
+	private Set<Order> orders = new HashSet<>();
 	
 	/**
 	 * Instantiates a new Payment.

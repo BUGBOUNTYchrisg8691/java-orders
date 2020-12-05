@@ -1,8 +1,8 @@
 package com.lambda.orders.models;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * The type Order.
@@ -12,9 +12,15 @@ public class Order
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long ordernum;
+	
 	private double ordamount;
 	private double advanceamt;
 	private String orderdescription;
+	
+	@ManyToMany
+	@JoinTable(name = "orderspayments", joinColumns = @JoinColumn(name = "ordernum"), inverseJoinColumns =
+	@JoinColumn(name = "paymentid"))
+	private Set<Payment> payments = new HashSet<>();
 	
 	/**
 	 * Instantiates a new Order.
