@@ -1,13 +1,14 @@
 package com.lambda.orders.models;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The type Customer.
  */
+@Entity
+@Table(name = "customers")
 public class Customer
 {
 	@Id
@@ -17,6 +18,7 @@ public class Customer
 	@Column(nullable = false)
 	private String custname;
 	
+	private String custcountry;
 	private String custcity;
 	private String workingarea;
 	private String grade;
@@ -25,6 +27,13 @@ public class Customer
 	private double paymentamt;
 	private double outstandingamt;
 	private String phone;
+	
+	@ManyToOne
+	@JoinColumn(name = "agentcode", nullable = false)
+	private Agent agent;
+	
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Order> orders = new ArrayList<>();
 	
 	/**
 	 * Instantiates a new Customer.
@@ -37,6 +46,7 @@ public class Customer
 	 * Instantiates a new Customer.
 	 *
 	 * @param custname       the custname
+	 * @param custcountry    the custcountry
 	 * @param custcity       the custcity
 	 * @param workingarea    the workingarea
 	 * @param grade          the grade
@@ -45,10 +55,14 @@ public class Customer
 	 * @param paymentamt     the paymentamt
 	 * @param outstandingamt the outstandingamt
 	 * @param phone          the phone
+	 * @param agent          the agent
 	 */
-	public Customer(String custname, String custcity, String workingarea, String grade, double openingamt, double receiveamt, double paymentamt, double outstandingamt, String phone)
+	public Customer(String custname, String custcountry, String custcity, String workingarea, String grade,
+	                double openingamt, double receiveamt, double paymentamt, double outstandingamt, String phone,
+	                Agent agent)
 	{
 		this.custname = custname;
+		this.custcountry = custcountry;
 		this.custcity = custcity;
 		this.workingarea = workingarea;
 		this.grade = grade;
@@ -57,6 +71,7 @@ public class Customer
 		this.paymentamt = paymentamt;
 		this.outstandingamt = outstandingamt;
 		this.phone = phone;
+		this.agent = agent;
 	}
 	
 	/**
@@ -97,6 +112,26 @@ public class Customer
 	public void setCustname(String custname)
 	{
 		this.custname = custname;
+	}
+	
+	/**
+	 * Gets custcountry.
+	 *
+	 * @return the custcountry
+	 */
+	public String getCustcountry()
+	{
+		return custcountry;
+	}
+	
+	/**
+	 * Sets custcountry.
+	 *
+	 * @param custcountry the custcountry
+	 */
+	public void setCustcountry(String custcountry)
+	{
+		this.custcountry = custcountry;
 	}
 	
 	/**
@@ -257,5 +292,45 @@ public class Customer
 	public void setPhone(String phone)
 	{
 		this.phone = phone;
+	}
+	
+	/**
+	 * Gets agent.
+	 *
+	 * @return the agent
+	 */
+	public Agent getAgent()
+	{
+		return agent;
+	}
+	
+	/**
+	 * Sets agent.
+	 *
+	 * @param agent the agent
+	 */
+	public void setAgent(Agent agent)
+	{
+		this.agent = agent;
+	}
+	
+	/**
+	 * Gets orders.
+	 *
+	 * @return the orders
+	 */
+	public List<Order> getOrders()
+	{
+		return orders;
+	}
+	
+	/**
+	 * Sets orders.
+	 *
+	 * @param orders the orders
+	 */
+	public void setOrders(List<Order> orders)
+	{
+		this.orders = orders;
 	}
 }

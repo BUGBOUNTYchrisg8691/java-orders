@@ -1,6 +1,8 @@
 package com.lambda.orders.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The type Agent.
@@ -13,11 +15,15 @@ public class Agent
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long agentcode;
 	
+	@Column(nullable = false)
 	private String agentname;
 	private String workingarea;
 	private double commission;
 	private String phone;
 	private String country;
+	
+	@OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Customer> customers = new ArrayList<>();
 	
 	/**
 	 * Instantiates a new Agent.
@@ -162,5 +168,25 @@ public class Agent
 	public void setCountry(String country)
 	{
 		this.country = country;
+	}
+	
+	/**
+	 * Gets customers.
+	 *
+	 * @return the customers
+	 */
+	public List<Customer> getCustomers()
+	{
+		return customers;
+	}
+	
+	/**
+	 * Sets customers.
+	 *
+	 * @param customers the customers
+	 */
+	public void setCustomers(List<Customer> customers)
+	{
+		this.customers = customers;
 	}
 }

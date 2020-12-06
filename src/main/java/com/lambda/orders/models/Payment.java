@@ -7,6 +7,8 @@ import java.util.Set;
 /**
  * The type Payment.
  */
+@Entity
+@Table(name = "payments")
 public class Payment
 {
 	@Id
@@ -74,5 +76,25 @@ public class Payment
 	public void setType(String type)
 	{
 		this.type = type;
+	}
+	
+	/**
+	 * Gets orders.
+	 *
+	 * @return the orders
+	 */
+	public Set<Order> getOrders()
+	{
+		return orders;
+	}
+	
+	/**
+	 * Sets orders.
+	 *
+	 * @param orders the orders
+	 */
+	public void setOrders(Set<Order> orders)
+	{
+		this.orders = orders;
 	}
 }

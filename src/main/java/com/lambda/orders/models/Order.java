@@ -7,18 +7,24 @@ import java.util.Set;
 /**
  * The type Order.
  */
+@Entity
+@Table(name = "orders")
 public class Order
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long ordernum;
+	private long ordnum;
 	
 	private double ordamount;
-	private double advanceamt;
+	private double advanceamount;
 	private String orderdescription;
 	
+	@ManyToOne
+	@JoinColumn(name = "custcode", nullable = false)
+	private Customer customer;
+	
 	@ManyToMany
-	@JoinTable(name = "orderspayments", joinColumns = @JoinColumn(name = "ordernum"), inverseJoinColumns =
+	@JoinTable(name = "orderspayments", joinColumns = @JoinColumn(name = "ordnum"), inverseJoinColumns =
 	@JoinColumn(name = "paymentid"))
 	private Set<Payment> payments = new HashSet<>();
 	
@@ -33,34 +39,36 @@ public class Order
 	 * Instantiates a new Order.
 	 *
 	 * @param ordamount        the ordamount
-	 * @param advanceamt       the advanceamt
+	 * @param advanceamount    the advanceamount
 	 * @param orderdescription the orderdescription
+	 * @param customer         the customer
 	 */
-	public Order(double ordamount, double advanceamt, String orderdescription)
+	public Order(double ordamount, double advanceamount, String orderdescription, Customer customer)
 	{
 		this.ordamount = ordamount;
-		this.advanceamt = advanceamt;
+		this.advanceamount = advanceamount;
 		this.orderdescription = orderdescription;
+		this.customer = customer;
 	}
 	
 	/**
-	 * Gets ordernum.
+	 * Gets ordnum.
 	 *
-	 * @return the ordernum
+	 * @return the ordnum
 	 */
-	public long getOrdernum()
+	public long getOrdnum()
 	{
-		return ordernum;
+		return ordnum;
 	}
 	
 	/**
-	 * Sets ordernum.
+	 * Sets ordnum.
 	 *
-	 * @param ordernum the ordernum
+	 * @param ordnum the ordnum
 	 */
-	public void setOrdernum(long ordernum)
+	public void setOrdnum(long ordnum)
 	{
-		this.ordernum = ordernum;
+		this.ordnum = ordnum;
 	}
 	
 	/**
@@ -84,23 +92,23 @@ public class Order
 	}
 	
 	/**
-	 * Gets advanceamt.
+	 * Gets advanceamount.
 	 *
-	 * @return the advanceamt
+	 * @return the advanceamount
 	 */
-	public double getAdvanceamt()
+	public double getAdvanceamount()
 	{
-		return advanceamt;
+		return advanceamount;
 	}
 	
 	/**
-	 * Sets advanceamt.
+	 * Sets advanceamount.
 	 *
-	 * @param advanceamt the advanceamt
+	 * @param advanceamount the advanceamount
 	 */
-	public void setAdvanceamt(double advanceamt)
+	public void setAdvanceamount(double advanceamount)
 	{
-		this.advanceamt = advanceamt;
+		this.advanceamount = advanceamount;
 	}
 	
 	/**
@@ -121,5 +129,45 @@ public class Order
 	public void setOrderdescription(String orderdescription)
 	{
 		this.orderdescription = orderdescription;
+	}
+	
+	/**
+	 * Gets payments.
+	 *
+	 * @return the payments
+	 */
+	public Set<Payment> getPayments()
+	{
+		return payments;
+	}
+	
+	/**
+	 * Sets payments.
+	 *
+	 * @param payments the payments
+	 */
+	public void setPayments(Set<Payment> payments)
+	{
+		this.payments = payments;
+	}
+	
+	/**
+	 * Gets customer.
+	 *
+	 * @return the customer
+	 */
+	public Customer getCustomer()
+	{
+		return customer;
+	}
+	
+	/**
+	 * Sets customer.
+	 *
+	 * @param customer the customer
+	 */
+	public void setCustomer(Customer customer)
+	{
+		this.customer = customer;
 	}
 }

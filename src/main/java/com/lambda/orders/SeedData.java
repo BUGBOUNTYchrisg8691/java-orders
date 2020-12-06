@@ -1,14 +1,14 @@
 package com.lambda.orders;
 
 import com.github.javafaker.Faker;
-import com.lambdaschool.orders.models.Agent;
-import com.lambdaschool.orders.models.Customer;
-import com.lambdaschool.orders.models.Order;
-import com.lambdaschool.orders.models.Payment;
-import com.lambdaschool.orders.repositories.AgentsRepository;
-import com.lambdaschool.orders.repositories.CustomersRepository;
-import com.lambdaschool.orders.repositories.OrdersRepository;
-import com.lambdaschool.orders.repositories.PaymentRepository;
+import com.lambda.orders.models.Agent;
+import com.lambda.orders.models.Customer;
+import com.lambda.orders.models.Order;
+import com.lambda.orders.models.Payment;
+import com.lambda.orders.repositories.AgentRepository;
+import com.lambda.orders.repositories.CustomerRepository;
+import com.lambda.orders.repositories.OrderRepository;
+import com.lambda.orders.repositories.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -19,28 +19,30 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.Set;
 
+/**
+ * The type Seed data.
+ */
 @Transactional
-//@Component
-public class SeedData
-		implements CommandLineRunner
+@Component
+public class SeedData implements CommandLineRunner
 {
 	/**
 	 * Connects the customer table to this SeedData method
 	 */
 	@Autowired
-	private CustomersRepository custrepos;
+	private CustomerRepository custrepos;
 
 	/**
 	 * Connects the agents table to this SeedData method
 	 */
 	@Autowired
-	private AgentsRepository agentrepos;
+	private AgentRepository agentrepos;
 
 	/**
 	 * Connects the orders table to this SeedData method
 	 */
 	@Autowired
-	private OrdersRepository ordersrepos;
+	private OrderRepository ordersrepos;
 
 	/**
 	 * Connects the payment table to this SeedData method
@@ -414,22 +416,22 @@ public class SeedData
 
 		Order o01 = new Order(1000.00,
 				600.00,
-				c13,
-				"SOD");
+				"SOD",
+				c13);
 		o01.getPayments()
 				.add(pay1);
 
 		Order o02 = new Order(3000.00,
 				500.00,
-				c19,
-				"SOD");
+				"SOD",
+				c19);
 		o02.getPayments()
 				.add(pay2);
 
 		Order o03 = new Order(4500.00,
 				900.00,
-				c07,
-				"SOD");
+				"SOD",
+				c07);
 		o03.getPayments()
 				.add(pay3);
 		o03.getPayments()
@@ -437,66 +439,50 @@ public class SeedData
 
 		Order o04 = new Order(2000.00,
 				0.00,
-				c16,
-				"SOD");
+				"SOD",
+				c16);
 		o04.getPayments()
 				.add(pay4);
 
 		Order o05 = new Order(4000.00,
 				600.00,
-				c22,
-				"SOD");
+				"SOD",
+				c22);
 		o05.getPayments()
 				.add(pay2);
 
 		Order o06 = new Order(2000.00,
 				0.00,
-				c12,
-				"SOD");
+				"SOD",
+				c12);
 		o06.getPayments()
 				.add(pay3);
 
 		Order o07 = new Order(3500.00,
 				2000.00,
-				c02,
-				"SOD");
+				"SOD",
+				c02);
 		o07.getPayments()
 				.add(pay4);
 
-		Order o08 = new Order(2500.00,
-				400.00,
-				c03,
-				"SOD");
+		Order o08 = new Order(2500.00, 400.00, "SOD", c03);
 		o08.getPayments()
 				.add(pay1);
 
-		Order o09 = new Order(500.00,
-				0.00,
-				c23,
-				"SOD");
+		Order o09 = new Order(500.00, 0.00, "SOD", c23);
 		o09.getPayments()
 				.add(pay3);
 
-		Order o10 = new Order(4000.00,
-				700.00,
-				c07,
-				"SOD");
-		o10.getPayments()
+		Order o10 = new Order(4000.00, 700.00, "SOD", c07);
+				o10.getPayments()
 				.add(pay4);
 
-		Order o11 = new Order(1500.00,
-				600.00,
-				c08,
-				"SOD");
-		o11.getPayments()
+		Order o11 = new Order(1500.00, 600.00, "SOD", c08);
+				o11.getPayments()
 				.add(pay2);
 
-		Order o12 = new Order(2500.00,
-				0.00,
-				c25,
-				"SOD");
-		o12.getPayments()
-				.add(pay1);
+		Order o12 = new Order(2500.00, 0.00, "SOD", c25);
+		o12.getPayments().add(pay1);
 
 		agentrepos.save(a01);
 		agentrepos.save(a02);
@@ -556,18 +542,15 @@ public class SeedData
 		Set<String> customerNames = new HashSet<>();
 		for (int i = 0; i < 100; i++)
 		{
-			customerNames.add(dataFaker.name()
-					.fullName());
+			customerNames.add(dataFaker.harryPotter().character());
 		}
 
 		for (String theName : customerNames)
 		{
 			String custcity = dataFaker.address()
 					.city();
-			String tempWorkingarea = dataFaker.address()
-					.cityName();
-			String tempCustcountry = dataFaker.address()
-					.country();
+			String tempWorkingarea = dataFaker.harryPotter().house();
+			String tempCustcountry = dataFaker.harryPotter().location();
 			String tempGrade = dataFaker.country()
 					.countryCode2();
 			double tempOpeningamt = dataFaker.number()
@@ -590,9 +573,9 @@ public class SeedData
 					.phoneNumber();
 
 			Customer fakeCustomer = new Customer(theName,
+					tempCustcountry,
 					custcity,
 					tempWorkingarea,
-					tempCustcountry,
 					tempGrade,
 					tempOpeningamt,
 					tempReceiveamt,
@@ -617,9 +600,9 @@ public class SeedData
 
 				Order newOrder = new Order(tempGetOrdamount,
 						tempGetAdvanceamount,
-						fakeCustomer,
-						tempGetOrderdescription);
-
+						tempGetOrderdescription,
+						fakeCustomer);
+				
 				newOrder.getPayments().add(pay1);
 				fakeCustomer.getOrders()
 						.add(newOrder);
