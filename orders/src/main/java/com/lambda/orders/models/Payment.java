@@ -16,4 +16,43 @@ public class Payment
 	private Set<Order> orders = new HashSet<>();
 	
 	private String type;
+	
+	public Payment()
+	{
+	}
+	
+	public Payment(String type)
+	{
+		this.type = type;
+	}
+	
+	public long getPaymentid()
+	{
+		return paymentid;
+	}
+	
+	public void setPaymentid(long paymentid)
+	{
+		this.paymentid = paymentid;
+	}
+	
+	public Set<Order> getOrders()
+	{
+		return orders;
+	}
+	
+	public void setOrders(Set<Order> orders)
+	{
+		this.orders = orders;
+	}
+	
+	public String getType()
+	{
+		return type;
+	}
+	
+	public void setType(String type)
+	{
+		this.type = type;
+	}
 }

@@ -591,17 +591,8 @@ public class SeedData
             String tempPhone = dataFaker.phoneNumber()
                     .phoneNumber();
 
-            Customer fakeCustomer = new Customer(theName,
-                                                 custcity,
-                                                 tempWorkingarea,
-                                                 tempCustcountry,
-                                                 tempGrade,
-                                                 tempOpeningamt,
-                                                 tempReceiveamt,
-                                                 tempPaymentamt,
-                                                 tempOutstandingamt,
-                                                 tempPhone,
-                                                 a10);
+            Customer fakeCustomer = new Customer(theName, custcity, tempCustcountry, tempWorkingarea, tempGrade,
+                    tempOpeningamt, tempReceiveamt, tempPaymentamt, tempOutstandingamt, tempPhone, a10);
 
             int randomNumber = random.nextInt(10); // random number 0 through 9
             for (int i = 0; i < randomNumber; i++)
