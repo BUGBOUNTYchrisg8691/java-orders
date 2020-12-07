@@ -12,10 +12,11 @@ public class Payment
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long paymentid;
 	
+	@Column(nullable = false)
+	private String type;
+	
 	@ManyToMany(mappedBy = "payments")
 	private Set<Order> orders = new HashSet<>();
-	
-	private String type;
 	
 	public Payment()
 	{

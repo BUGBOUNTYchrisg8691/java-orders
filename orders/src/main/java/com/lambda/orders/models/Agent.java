@@ -12,10 +12,12 @@ public class Agent
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long agentcode;
 	
+	@Column(nullable = false)
+	private String agentname;
+	
 	@OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = false)
 	private List<Customer> customers = new ArrayList<>();
 	
-	private String agentname;
 	private String workingarea;
 	private double commission;
 	private String phone;

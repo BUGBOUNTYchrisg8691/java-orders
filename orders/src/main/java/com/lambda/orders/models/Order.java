@@ -21,8 +21,6 @@ public class Order
 	@JoinColumn(name = "custcode", nullable = false)
 	private Customer customer;
 	
-	private long custcode;
-	
 	private double ordamount;
 	private double advanceamount;
 	private String orderdescription;
@@ -68,16 +66,6 @@ public class Order
 	public void setCustomer(Customer customer)
 	{
 		this.customer = customer;
-	}
-	
-	public long getCustcode()
-	{
-		return custcode;
-	}
-	
-	public void setCustcode(long custcode)
-	{
-		this.custcode = custcode;
 	}
 	
 	public double getOrdamount()
