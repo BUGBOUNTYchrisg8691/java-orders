@@ -558,18 +558,14 @@ public class SeedData
         Set<String> customerNames = new HashSet<>();
         for (int i = 0; i < 100; i++)
         {
-            customerNames.add(dataFaker.name()
-                                      .fullName());
+            customerNames.add(dataFaker.gameOfThrones().character());
         }
 
         for (String theName : customerNames)
         {
-            String custcity = dataFaker.address()
-                    .city();
-            String tempWorkingarea = dataFaker.address()
-                    .cityName();
-            String tempCustcountry = dataFaker.address()
-                    .country();
+            String custcity = dataFaker.gameOfThrones().city();
+            String tempWorkingarea = dataFaker.gameOfThrones().house();
+            String tempCustcountry = dataFaker.rickAndMorty().location();
             String tempGrade = dataFaker.country()
                     .countryCode2();
             double tempOpeningamt = dataFaker.number()
