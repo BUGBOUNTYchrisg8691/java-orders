@@ -1,14 +1,14 @@
-package com.lambdaschool.orders;
+package com.lambda.orders;
 
 import com.github.javafaker.Faker;
-import com.lambdaschool.orders.models.Agent;
-import com.lambdaschool.orders.models.Customer;
-import com.lambdaschool.orders.models.Order;
-import com.lambdaschool.orders.models.Payment;
-import com.lambdaschool.orders.repositories.AgentsRepository;
-import com.lambdaschool.orders.repositories.CustomersRepository;
-import com.lambdaschool.orders.repositories.OrdersRepository;
-import com.lambdaschool.orders.repositories.PaymentRepository;
+import com.lambda.orders.models.Agent;
+import com.lambda.orders.models.Customer;
+import com.lambda.orders.models.Order;
+import com.lambda.orders.models.Payment;
+import com.lambda.orders.repositories.AgentRepository;
+import com.lambda.orders.repositories.CustomerRepository;
+import com.lambda.orders.repositories.OrderRepository;
+import com.lambda.orders.repositories.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -28,19 +28,19 @@ public class SeedData
      * Connects the customer table to this SeedData method
      */
     @Autowired
-    private CustomersRepository custrepos;
+    private CustomerRepository custrepos;
 
     /**
      * Connects the agents table to this SeedData method
      */
     @Autowired
-    private AgentsRepository agentrepos;
+    private AgentRepository agentrepos;
 
     /**
      * Connects the orders table to this SeedData method
      */
     @Autowired
-    private OrdersRepository ordersrepos;
+    private OrderRepository orderrepos;
 
     /**
      * Connects the payment table to this SeedData method
@@ -539,18 +539,18 @@ public class SeedData
         custrepos.save(c24);
         custrepos.save(c25);
 
-        ordersrepos.save(o01);
-        ordersrepos.save(o02);
-        ordersrepos.save(o03);
-        ordersrepos.save(o04);
-        ordersrepos.save(o05);
-        ordersrepos.save(o06);
-        ordersrepos.save(o07);
-        ordersrepos.save(o08);
-        ordersrepos.save(o09);
-        ordersrepos.save(o10);
-        ordersrepos.save(o11);
-        ordersrepos.save(o12);
+        orderrepos.save(o01);
+        orderrepos.save(o02);
+        orderrepos.save(o03);
+        orderrepos.save(o04);
+        orderrepos.save(o05);
+        orderrepos.save(o06);
+        orderrepos.save(o07);
+        orderrepos.save(o08);
+        orderrepos.save(o09);
+        orderrepos.save(o10);
+        orderrepos.save(o11);
+        orderrepos.save(o12);
 
         //Begins the faker data
 
